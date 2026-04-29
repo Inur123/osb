@@ -14,6 +14,7 @@ export const SITE = {
   email: "pcipnuippnu.magetan@gmail.com",
   location: "Kabupaten Magetan, Jawa Timur",
   year: 2025,
+  timezone: "Asia/Jakarta",
 } as const;
 
 export const SENI_BUDAYA_ITEMS = [

@@ -1,9 +1,19 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { MapPin, Mail, Phone, Heart } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/app/lib/constants";
 import SmoothScrollLink from "@/app/_components/shared/SmoothScrollLink";
 import OSBLogo from "@/app/_components/shared/OSBLogo";
+import { getLocalizedDate } from "@/app/lib/utils";
 
 export default function Footer() {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setCurrentYear(getLocalizedDate().getFullYear());
+  }, []);
+
   return (
     <footer id="kontak" className="border-t border-gray-100 bg-gray-50/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -66,7 +76,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-400">
-            © {SITE.year} {SITE.org}. All rights reserved.
+            © {currentYear} {SITE.org}. All rights reserved (WIB).
           </p>
           <div className="flex items-center gap-1 text-xs text-gray-400">
             <span>Made with</span>
