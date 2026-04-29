@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { ChevronUp } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 500) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -27,22 +26,15 @@ export default function ScrollToTop() {
     });
   };
 
+  if (!isVisible) return null;
+
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 p-3 rounded-xl bg-ipnu-600 text-white shadow-lg shadow-ipnu-500/20 hover:bg-ipnu-700 transition-colors"
-          aria-label="Scroll to top"
-        >
-          <ChevronUp size={20} strokeWidth={2.5} />
-        </motion.button>
-      )}
-    </AnimatePresence>
+    <button
+      onClick={scrollToTop}
+      className="fixed bottom-8 right-8 z-40 bg-ipnu-600 text-white p-4 rounded-full shadow-2xl hover:bg-ipnu-700 transition-all duration-300 hover:scale-110 active:scale-95 border border-ipnu-500/20"
+      aria-label="Scroll to top"
+    >
+      <ChevronUp size={24} />
+    </button>
   );
 }

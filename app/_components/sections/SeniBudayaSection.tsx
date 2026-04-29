@@ -1,72 +1,52 @@
 "use client";
 
 import Image from "next/image";
-import { Brush, PenTool, Music, Swords } from "lucide-react";
-import { motion } from "motion/react";
-import type { LucideIcon } from "lucide-react";
+import { Music, Camera, Palette, Mic2 } from "lucide-react";
 
-interface Category {
-  name: string;
-  icon: LucideIcon;
-  desc: string;
-  gradient: string;
-  iconColor: string;
-  border: string;
-}
-
-const CATEGORIES: Category[] = [
+const CATEGORIES = [
+  {
+    name: "Seni Musik",
+    icon: Music,
+    desc: "Vokal, Hadrah, & Musik Modern",
+    gradient: "from-amber-50 to-amber-100",
+    iconColor: "text-amber-600",
+    border: "border-amber-100",
+  },
+  {
+    name: "Seni Visual",
+    icon: Camera,
+    desc: "Fotografi & Desain Grafis",
+    gradient: "from-ipnu-50 to-ipnu-100",
+    iconColor: "text-ipnu-600",
+    border: "border-ipnu-100",
+  },
   {
     name: "Seni Lukis",
-    icon: Brush,
-    desc: "Ekspresikan kreativitas melalui goresan warna dan imajinasi.",
+    icon: Palette,
+    desc: "Lukis & Kaligrafi",
     gradient: "from-rose-50 to-rose-100",
-    iconColor: "text-rose-500",
-    border: "hover:border-rose-200",
+    iconColor: "text-rose-600",
+    border: "border-rose-100",
   },
   {
-    name: "Seni Kaligrafi",
-    icon: PenTool,
-    desc: "Keindahan aksara Arab yang menjadi karya seni bernilai tinggi.",
-    gradient: "from-amber-50 to-amber-100",
-    iconColor: "text-amber-500",
-    border: "hover:border-amber-200",
+    name: "Seni Pertunjukan",
+    icon: Mic2,
+    desc: "Puisi & Public Speaking",
+    gradient: "from-blue-50 to-blue-100",
+    iconColor: "text-blue-600",
+    border: "border-blue-100",
   },
-  {
-    name: "Seni Tari",
-    icon: Music,
-    desc: "Lestarikan budaya Nusantara melalui gerakan tari tradisional.",
-    gradient: "from-purple-50 to-purple-100",
-    iconColor: "text-purple-500",
-    border: "hover:border-purple-200",
-  },
-  {
-    name: "Pencak Silat",
-    icon: Swords,
-    desc: "Seni bela diri warisan budaya Indonesia yang mengasah mental.",
-    gradient: "from-emerald-50 to-emerald-100",
-    iconColor: "text-emerald-600",
-    border: "hover:border-emerald-200",
-  },
-];
+] as const;
 
 export default function SeniBudayaSection() {
   return (
-    <section
-      id="seni-budaya"
-      className="relative py-10 sm:py-14 bg-white overflow-hidden"
-    >
+    <section id="seni" className="relative py-10 sm:py-14 bg-white overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative order-2 lg:order-1"
-          >
+          <div className="relative order-2 lg:order-1">
             <div className="absolute inset-4 bg-gradient-to-br from-ipnu-100/50 to-amber-100/30 rounded-3xl blur-2xl" />
-            <div className="relative bg-white rounded-3xl overflow-hidden">
+            <div className="relative">
               <Image
                 src="/images/seni-budaya.png"
                 alt="Seni Budaya"
@@ -76,16 +56,11 @@ export default function SeniBudayaSection() {
                 unoptimized
               />
             </div>
-          </motion.div>
+          </div>
 
           {/* Content */}
           <div className="order-1 lg:order-2 space-y-8 text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <div>
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase text-amber-600 border border-amber-200 bg-amber-50 mb-4">
                 Bidang Seni & Budaya
               </span>
@@ -97,22 +72,18 @@ export default function SeniBudayaSection() {
                 tersedia. Temukan passionmu and kembangkan bersama IPNU IPPNU
                 Magetan.
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
-              {CATEGORIES.map((cat, i) => {
+              {CATEGORIES.map((cat) => {
                 const Icon = cat.icon;
                 return (
-                  <motion.div
+                  <div
                     key={cat.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                    className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${cat.border} flex flex-col items-center text-center sm:items-start sm:text-left`}
+                    className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${cat.border} flex flex-col items-center text-center sm:items-start sm:text-left transition-all duration-300 hover:translate-x-1`}
                   >
                     <div
-                      className={`icon-box bg-gradient-to-br ${cat.gradient} mb-3 group-hover:scale-110 transition-transform`}
+                      className={`icon-box bg-gradient-to-br ${cat.gradient} mb-3 transition-transform`}
                     >
                       <Icon size={20} className={cat.iconColor} />
                     </div>
@@ -120,7 +91,7 @@ export default function SeniBudayaSection() {
                     <p className="text-xs text-gray-400 leading-relaxed">
                       {cat.desc}
                     </p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
