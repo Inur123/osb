@@ -46,7 +46,7 @@ export default function AboutSection() {
             Tentang Program
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Mengapa <span className="gradient-text-green">OSB IPNU IPPNU?</span>
+            Mengapa <span className="gradient-text-green" style={{ color: "#059669" }}>OSB IPNU IPPNU?</span>
           </h2>
           <p className="text-gray-500 text-lg leading-relaxed">
             Program Olahraga, Seni & Budaya (OSB) merupakan program unggulan PC
@@ -67,6 +67,7 @@ export default function AboutSection() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-ipnu-200 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                 <div
                   className={`icon-box bg-gradient-to-br ${f.gradient} mx-auto mb-4 transition-transform duration-300`}
+                  style={{ backgroundColor: f.iconColor.includes("emerald") ? "#ecfdf5" : f.iconColor.includes("amber") ? "#fffbeb" : f.iconColor.includes("blue") ? "#eff6ff" : "#f5f3ff" }}
                 >
                   <Icon size={22} className={f.iconColor} />
                 </div>

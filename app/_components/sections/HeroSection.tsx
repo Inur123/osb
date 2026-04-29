@@ -26,7 +26,9 @@ export default function HeroSection() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
               <span className="text-gray-900">Olahraga,</span>
               <br />
-              <span className="gradient-text">Seni & Budaya</span>
+              <span className="gradient-text" style={{ color: "#059669" }}>
+                Seni & Budaya
+              </span>
               <br />
               <span className="text-ipnu-600 text-3xl sm:text-4xl lg:text-5xl font-semibold">
                 PC IPNU IPPNU Magetan
@@ -62,12 +64,15 @@ export default function HeroSection() {
 
             <div className="flex justify-center lg:justify-start gap-8 pt-4">
               {[
-                { number: "8+", label: "Cabang Minat" },
-                { number: "20+", label: "PAC Se-Magetan" },
-                { number: "100+", label: "Peserta" },
+                { number: "8+", label: "Cabang Minat", color: "#059669" },
+                { number: "20+", label: "PAC Se-Magetan", color: "#059669" },
+                { number: "100+", label: "Peserta", color: "#059669" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold gradient-text-green">
+                  <div 
+                    className="text-2xl sm:text-3xl font-bold gradient-text-green"
+                    style={{ color: stat.color }}
+                  >
                     {stat.number}
                   </div>
                   <div className="text-xs text-gray-400 mt-1 font-medium whitespace-nowrap">

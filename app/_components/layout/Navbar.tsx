@@ -93,9 +93,10 @@ export default function Navbar() {
       {menuOpen && (
         <div
           className={`md:hidden overflow-hidden ${
-            scrolled ? "bg-white/95 backdrop-blur-xl" : "bg-white/90 backdrop-blur-lg"
+            scrolled ? "bg-white/95 backdrop-blur-xl" : "bg-white"
           }`}
           style={{
+            backgroundColor: scrolled ? "rgba(255, 255, 255, 0.95)" : "#ffffff",
             WebkitBackdropFilter: scrolled ? "blur(24px)" : "blur(16px)",
             WebkitTapHighlightColor: "transparent",
           }}

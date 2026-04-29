@@ -47,7 +47,7 @@ export default function OlahragaSection() {
           <div className="space-y-8 text-center lg:text-left">
             <div>
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase text-ipnu-600 border border-ipnu-200 bg-ipnu-50 mb-4">Bidang Olahraga</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Tunjukkan <span className="gradient-text-green">Sportivitasmu</span></h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Tunjukkan <span className="gradient-text-green" style={{ color: "#059669" }}>Sportivitasmu</span></h2>
               <p className="text-gray-500 leading-relaxed mx-auto lg:mx-0 max-w-lg">Bergabunglah dalam berbagai cabang olahraga dan buktikan kemampuanmu bersama kader IPNU IPPNU Magetan.</p>
             </div>
 
@@ -59,7 +59,10 @@ export default function OlahragaSection() {
                     key={sport.name}
                     className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${sport.border} flex flex-col items-center text-center sm:items-start sm:text-left transition-all duration-300 hover:scale-[1.02]`}
                   >
-                    <div className={`icon-box bg-gradient-to-br ${sport.gradient} mb-3 transition-transform`}>
+                    <div 
+                      className={`icon-box bg-gradient-to-br ${sport.gradient} mb-3 group-hover:rotate-6 transition-transform`}
+                      style={{ backgroundColor: sport.iconColor.includes("emerald") ? "#ecfdf5" : sport.iconColor.includes("sky") ? "#f0f9ff" : sport.iconColor.includes("violet") ? "#f5f3ff" : "#fff7ed" }}
+                    >
                       <Icon size={20} className={sport.iconColor} />
                     </div>
                     <h4 className="font-bold text-gray-800 mb-1">{sport.name}</h4>

@@ -65,7 +65,7 @@ export default function SeniBudayaSection() {
                 Bidang Seni & Budaya
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Ekspresikan <span className="gradient-text">Jiwa Senimu</span>
+                Ekspresikan <span className="gradient-text" style={{ color: "#059669" }}>Jiwa Senimu</span>
               </h2>
               <p className="text-gray-500 leading-relaxed mx-auto lg:mx-0 max-w-lg">
                 Salurkan bakat seni dan budayamu melalui berbagai cabang yang
@@ -75,7 +75,7 @@ export default function SeniBudayaSection() {
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
-              {CATEGORIES.map((cat) => {
+              {CATEGORIES.map((cat, i) => {
                 const Icon = cat.icon;
                 return (
                   <div
@@ -84,6 +84,7 @@ export default function SeniBudayaSection() {
                   >
                     <div
                       className={`icon-box bg-gradient-to-br ${cat.gradient} mb-3 transition-transform`}
+                      style={{ backgroundColor: cat.iconColor.includes("amber") ? "#fffbeb" : cat.iconColor.includes("ipnu") ? "#ecfdf5" : cat.iconColor.includes("rose") ? "#fff1f2" : "#eff6ff" }}
                     >
                       <Icon size={20} className={cat.iconColor} />
                     </div>
