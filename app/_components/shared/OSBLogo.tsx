@@ -25,15 +25,15 @@ export default function OSBLogo({ className = "w-10 h-10" }: { className?: strin
           </feMerge>
         </filter>
       </defs>
-      {/* Background removed as requested */}
+      <rect x="10" y="10" width="80" height="80" rx="20" fill="url(#logo-gradient)" filter="url(#shadow)" />
       <path
         d="M35 35C35 30 40 25 50 25C60 25 65 30 65 35C65 45 35 55 35 65C35 70 40 75 50 75C60 75 65 70 65 65"
-        stroke="url(#logo-gradient)"
-        strokeWidth="10"
+        stroke="white"
+        strokeWidth="8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <circle cx="50" cy="50" r="6" fill="#10b981" />
+      <circle cx="50" cy="50" r="5" fill="white" />
     </svg>
   );
 }

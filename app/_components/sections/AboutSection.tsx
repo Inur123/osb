@@ -38,7 +38,7 @@ export default function AboutSection() {
   return (
     <section
       id="tentang"
-      className="relative py-24 sm:py-32 section-soft overflow-hidden"
+      className="relative py-10 sm:py-14 section-soft overflow-hidden"
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}

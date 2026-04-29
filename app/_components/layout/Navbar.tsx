@@ -87,76 +87,53 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay - Moved outside constraints */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-white z-[9999] md:hidden flex flex-col"
-          >
-            {/* Mobile Header Inside Overlay */}
-            <div className="flex items-center justify-between px-4 py-5 border-b border-gray-50 bg-white shrink-0">
-              <div className="flex items-center gap-3">
-                <OSBLogo className="w-10 h-10 shadow-lg shadow-ipnu-500/10 rounded-xl" />
-                <div className="flex flex-col text-left">
-                  <span className="font-bold text-lg leading-none text-gray-900">
-                    OSB
-                  </span>
-                  <span className="text-[10px] text-ipnu-500 tracking-widest uppercase font-semibold">
-                    IPNU IPPNU Magetan
-                  </span>
-                </div>
-              </div>
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="p-2 text-ipnu-700 hover:bg-ipnu-50 rounded-lg transition-colors"
-                aria-label="Close menu"
-              >
-                <X size={28} />
-              </button>
-            </div>
-
-            {/* Menu Links */}
-            <div className="flex-1 overflow-y-auto px-4 py-12 flex flex-col items-center justify-center space-y-8">
-              {NAV_LINKS.map((link, i) => (
+        {/* Mobile Menu Dropdown (Gaya 'Nyatu') */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className={`md:hidden overflow-hidden ${
+                scrolled ? "bg-white/95 backdrop-blur-xl" : "bg-white/90 backdrop-blur-lg"
+              }`}
+            >
+              <div className="px-6 py-8 space-y-6 text-center border-t border-gray-50/50">
+                {NAV_LINKS.map((link, i) => (
+                  <motion.div
+                    key={link.id}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <SmoothScrollLink
+                      targetId={link.id}
+                      onClick={() => setMenuOpen(false)}
+                      className="block py-2 text-xl font-bold text-gray-800 hover:text-ipnu-600 transition-colors"
+                    >
+                      {link.label}
+                    </SmoothScrollLink>
+                  </motion.div>
+                ))}
                 <motion.div
-                  key={link.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 + 0.2 }}
-                  className="w-full"
+                  transition={{ delay: NAV_LINKS.length * 0.05 }}
+                  className="pt-4"
                 >
                   <SmoothScrollLink
-                    targetId={link.id}
+                    targetId="daftar"
                     onClick={() => setMenuOpen(false)}
-                    className="block py-3 text-3xl font-bold text-gray-800 hover:text-ipnu-600 transition-colors text-center"
+                    className="btn-primary w-full justify-center py-4 text-lg font-bold shadow-xl shadow-ipnu-500/15"
                   >
-                    {link.label}
+                    <span>Daftar Sekarang</span>
                   </SmoothScrollLink>
                 </motion.div>
-              ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05 + 0.2 }}
-                className="pt-10 w-full max-w-sm"
-              >
-                <SmoothScrollLink
-                  targetId="daftar"
-                  onClick={() => setMenuOpen(false)}
-                  className="btn-primary w-full justify-center py-5 text-xl font-bold shadow-2xl shadow-ipnu-500/30"
-                >
-                  <span>Daftar Sekarang</span>
-                </SmoothScrollLink>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
     </nav>
   );
 }

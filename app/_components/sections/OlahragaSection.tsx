@@ -23,7 +23,7 @@ const SPORTS: Sport[] = [
 
 export default function OlahragaSection() {
   return (
-    <section id="olahraga" className="relative py-24 sm:py-32 section-soft overflow-hidden">
+    <section id="olahraga" className="relative py-10 sm:py-14 bg-gray-50/50 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}

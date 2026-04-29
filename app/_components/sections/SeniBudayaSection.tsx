@@ -53,7 +53,7 @@ export default function SeniBudayaSection() {
   return (
     <section
       id="seni-budaya"
-      className="relative py-24 sm:py-32 bg-white overflow-hidden"
+      className="relative py-10 sm:py-14 bg-white overflow-hidden"
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

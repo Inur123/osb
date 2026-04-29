@@ -1,6 +1,7 @@
 import { MapPin, Mail, Phone, Heart } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/app/lib/constants";
 import SmoothScrollLink from "@/app/_components/shared/SmoothScrollLink";
+import OSBLogo from "@/app/_components/shared/OSBLogo";
 
 export default function Footer() {
   return (
@@ -10,9 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-ipnu-500 to-ipnu-600 flex items-center justify-center font-bold text-white text-lg">
-                O
-              </div>
+              <OSBLogo className="w-10 h-10 shadow-lg shadow-ipnu-500/20 rounded-xl" />
               <div>
                 <div className="font-bold text-lg text-gray-900">
                   {SITE.name}

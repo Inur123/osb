@@ -37,10 +37,10 @@ export default function ScrollToTop() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 p-4 rounded-2xl bg-ipnu-600 text-white shadow-lg shadow-ipnu-500/30 hover:bg-ipnu-700 transition-colors"
+          className="fixed bottom-6 right-6 z-50 p-3 rounded-xl bg-ipnu-600 text-white shadow-lg shadow-ipnu-500/20 hover:bg-ipnu-700 transition-colors"
           aria-label="Scroll to top"
         >
-          <ChevronUp size={24} strokeWidth={2.5} />
+          <ChevronUp size={20} strokeWidth={2.5} />
         </motion.button>
       )}
     </AnimatePresence>
