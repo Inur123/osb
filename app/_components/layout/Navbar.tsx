@@ -29,10 +29,10 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 py-3 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-xl py-3 shadow-[0_1px_20px_rgba(16,185,129,0.06)]"
-          : "bg-white/60 backdrop-blur-sm py-5"
+          ? "bg-white/95 backdrop-blur-xl shadow-[0_1px_20px_rgba(16,185,129,0.06)]"
+          : "bg-white/60 backdrop-blur-sm"
       }`}
       style={{
         WebkitBackdropFilter: scrolled ? "blur(24px)" : "blur(8px)",
