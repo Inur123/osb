@@ -79,7 +79,7 @@ export default function SeniBudayaSection() {
           </motion.div>
 
           {/* Content */}
-          <div className="order-1 lg:order-2 space-y-8">
+          <div className="order-1 lg:order-2 space-y-8 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -92,7 +92,7 @@ export default function SeniBudayaSection() {
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 Ekspresikan <span className="gradient-text">Jiwa Senimu</span>
               </h2>
-              <p className="text-gray-500 leading-relaxed">
+              <p className="text-gray-500 leading-relaxed mx-auto lg:mx-0 max-w-lg">
                 Salurkan bakat seni dan budayamu melalui berbagai cabang yang
                 tersedia. Temukan passionmu and kembangkan bersama IPNU IPPNU
                 Magetan.
@@ -110,7 +110,7 @@ export default function SeniBudayaSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                    className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${cat.border}`}
+                    className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${cat.border} flex flex-col items-center text-center sm:items-start sm:text-left`}
                   >
                     <div
                       className={`icon-box bg-gradient-to-br ${cat.gradient} mb-3 group-hover:scale-110 transition-transform`}

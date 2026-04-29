@@ -27,7 +27,7 @@ export default function OlahragaSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -36,7 +36,7 @@ export default function OlahragaSection() {
             >
               <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase text-ipnu-600 border border-ipnu-200 bg-ipnu-50 mb-4">Bidang Olahraga</span>
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Tunjukkan <span className="gradient-text-green">Sportivitasmu</span></h2>
-              <p className="text-gray-500 leading-relaxed">Bergabunglah dalam berbagai cabang olahraga dan buktikan kemampuanmu bersama kader IPNU IPPNU Magetan.</p>
+              <p className="text-gray-500 leading-relaxed mx-auto lg:mx-0 max-w-lg">Bergabunglah dalam berbagai cabang olahraga dan buktikan kemampuanmu bersama kader IPNU IPPNU Magetan.</p>
             </motion.div>
 
             <div className="grid sm:grid-cols-2 gap-4">
@@ -50,7 +50,7 @@ export default function OlahragaSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                    className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${sport.border}`}
+                    className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${sport.border} flex flex-col items-center text-center sm:items-start sm:text-left`}
                   >
                     <div className={`icon-box bg-gradient-to-br ${sport.gradient} mb-3 group-hover:rotate-6 transition-transform`}>
                       <Icon size={20} className={sport.iconColor} />

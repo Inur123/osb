@@ -23,7 +23,7 @@ export default function HeroSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-8"
+            className="space-y-8 text-center lg:text-left"
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -56,13 +56,13 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            <p className="text-lg text-gray-500 max-w-lg leading-relaxed">
+            <p className="text-lg text-gray-500 max-w-lg leading-relaxed mx-auto lg:mx-0">
               Wadah pengembangan minat dan bakat generasi muda NU Kabupaten
               Magetan di bidang olahraga, seni dan budaya. Tunjukkan potensimu,
               raih prestasimu!
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 sm:max-w-none">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
