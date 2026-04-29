@@ -62,21 +62,36 @@ body {
   transition: all 0.3s ease;
 }
 
-/* ========== Gradient Text ========== */
+/* ========== Gradient Text - SAFARI SAFE VERSION ========== */
 .gradient-text {
-  @apply bg-clip-text bg-gradient-to-r from-ipnu-600 to-amber-500 font-extrabold;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: #059669; /* Fallback Solid Color */
+  font-extrabold: inherit;
 }
 
 .gradient-text-green {
-  @apply bg-clip-text bg-gradient-to-r from-ipnu-500 to-ipnu-700 font-extrabold;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: #059669; /* Fallback Solid Color */
+  font-extrabold: inherit;
+}
+
+/* Hanya gunakan gradasi jika didukung penuh */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .gradient-text {
+    background-image: linear-gradient(to right, #059669, #f59e0b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-weight: 800;
+  }
+
+  .gradient-text-green {
+    background-image: linear-gradient(to right, #10b981, #047857);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-weight: 800;
+  }
 }
 
 /* ========== Buttons ========== */
