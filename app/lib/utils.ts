@@ -5,7 +5,9 @@ import { SITE } from "./constants";
  */
 export function getLocalizedDate(): Date {
   const now = new Date();
-  const localizedString = now.toLocaleString("en-US", { timeZone: SITE.timezone });
+  const localizedString = now.toLocaleString("en-US", {
+    timeZone: SITE.timezone,
+  });
   return new Date(localizedString);
 }
 
@@ -13,9 +15,11 @@ export function getLocalizedDate(): Date {
  * Memformat tanggal ke format string lokal yang konsisten
  */
 export function formatToWIB(date: Date = new Date()): string {
-  return date.toLocaleString("id-ID", {
-    timeZone: SITE.timezone,
-    dateStyle: "long",
-    timeStyle: "short",
-  }) + " WIB";
+  return (
+    date.toLocaleString("id-ID", {
+      timeZone: SITE.timezone,
+      dateStyle: "long",
+      timeStyle: "short",
+    }) + " WIB"
+  );
 }

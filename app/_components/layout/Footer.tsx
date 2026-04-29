@@ -76,7 +76,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-gray-400">
-            © {currentYear} {SITE.org}. All rights reserved (WIB).
+            © {currentYear} {SITE.org}. All rights reserved.
           </p>
           <div className="flex items-center gap-1 text-xs text-gray-400">
             <span>Made with</span>
