@@ -44,8 +44,7 @@ export default function AboutSection() {
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
@@ -73,8 +72,7 @@ export default function AboutSection() {
               <motion.div
                 key={f.title}
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 whileHover={{ y: -10, transition: { duration: 0.3 } }}
                 className="glass-card rounded-2xl p-6 text-center group bg-white relative overflow-hidden"

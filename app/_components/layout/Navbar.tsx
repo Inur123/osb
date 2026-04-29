@@ -25,6 +25,9 @@ export default function Navbar() {
           ? "bg-white/95 backdrop-blur-xl py-3 shadow-[0_1px_20px_rgba(16,185,129,0.06)]"
           : "bg-white/60 backdrop-blur-sm py-5"
       }`}
+      style={{
+        WebkitBackdropFilter: scrolled ? "blur(24px)" : "blur(8px)",
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -98,6 +101,9 @@ export default function Navbar() {
               className={`md:hidden overflow-hidden ${
                 scrolled ? "bg-white/95 backdrop-blur-xl" : "bg-white/90 backdrop-blur-lg"
               }`}
+              style={{
+                WebkitBackdropFilter: scrolled ? "blur(24px)" : "blur(16px)",
+              }}
             >
               <div className="px-6 py-8 space-y-6 text-center border-t border-gray-50/50">
                 {NAV_LINKS.map((link, i) => (

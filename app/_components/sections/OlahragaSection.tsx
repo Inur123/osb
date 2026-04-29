@@ -46,8 +46,7 @@ export default function OlahragaSection() {
                   <motion.div
                     key={sport.name}
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                     className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${sport.border} flex flex-col items-center text-center sm:items-start sm:text-left`}
@@ -72,7 +71,7 @@ export default function OlahragaSection() {
             className="relative"
           >
             <div className="absolute inset-4 bg-gradient-to-br from-ipnu-100/50 to-sky-100/30 rounded-3xl blur-2xl" />
-            <div className="relative">
+            <div className="relative bg-white rounded-3xl overflow-hidden">
               <Image
                 src="/images/olahraga.png"
                 alt="Olahraga"

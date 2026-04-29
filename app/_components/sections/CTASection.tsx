@@ -9,8 +9,7 @@ export default function CTASection() {
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           className="relative rounded-3xl p-10 sm:p-16 overflow-hidden bg-gradient-to-br from-ipnu-500 to-ipnu-600 shadow-2xl shadow-ipnu-500/25"
         >
