@@ -39,24 +39,24 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-full">
-          {/* Left: Logo */}
-          <div className="flex-1 flex justify-start items-center gap-3">
-            <div>
+        <div className="flex items-center justify-between h-20">
+          {/* Left: Logo & Title - Ultra Neat Alignment */}
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="flex-shrink-0 scale-90 sm:scale-100 origin-left">
               <OSBLogo />
             </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-black tracking-tight text-gray-900 leading-none">
+            <div className="flex flex-col justify-center border-l border-gray-100 pl-2 sm:pl-3">
+              <span className="text-lg sm:text-xl font-black tracking-tighter text-gray-900 leading-none mb-0.5 whitespace-nowrap">
                 OSB
               </span>
-              <span className="text-[10px] font-bold text-ipnu-600 tracking-[0.15em] uppercase mt-0.5">
+              <span className="text-[8px] sm:text-[10px] font-extrabold text-ipnu-600 tracking-wider uppercase leading-none whitespace-nowrap">
                 IPNU IPPNU Magetan
               </span>
             </div>
           </div>
 
-          {/* Center: Desktop Navigation Links */}
-          <div className="hidden md:flex flex-1 justify-center items-center gap-1 lg:gap-2">
+          {/* Center: Desktop Navigation Links - Responsive Spacing */}
+          <div className="hidden lg:flex flex-1 justify-center items-center gap-1 xl:gap-2">
             {NAV_LINKS.map((link) => (
               <SmoothScrollLink
                 key={link.id}
@@ -70,29 +70,33 @@ export default function Navbar() {
           </div>
 
           {/* Right: Button & Mobile Toggle */}
-          <div className="flex-1 flex justify-end items-center gap-4">
+          <div className="flex-[0_0_auto] md:flex-1 flex justify-end items-center gap-2 sm:gap-4">
             <div className="hidden md:block">
               <SmoothScrollLink
                 targetId="daftar"
-                className="btn-primary py-2.5 px-6 text-sm font-bold shadow-lg shadow-ipnu-500/20 whitespace-nowrap"
+                className="btn-primary py-2 px-5 sm:px-6 text-xs sm:text-sm font-bold shadow-lg shadow-ipnu-500/20 whitespace-nowrap"
               >
                 <span>Daftar Sekarang</span>
               </SmoothScrollLink>
             </div>
 
-            {/* Mobile Toggle */}
-            <button
-              id="nav-menu-toggle"
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden p-2 text-ipnu-700 hover:bg-ipnu-50 rounded-lg transition-colors cursor-pointer relative z-[101]"
-              style={{ 
-                touchAction: "manipulation",
-                WebkitTapHighlightColor: "transparent" 
-              }}
-              aria-label="Toggle menu"
-            >
-              {menuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+            {/* Mobile Toggle - MEGA HIT AREA FIX */}
+            <div className="md:hidden">
+              <button
+                id="nav-menu-toggle"
+                onClick={() => setMenuOpen(!menuOpen)}
+                onPointerDown={() => setMenuOpen(!menuOpen)} // FALLBACK FOR iOS SAFARI
+                className="group p-3 -mr-2 text-ipnu-700 active:bg-ipnu-50 rounded-full transition-all cursor-pointer relative z-[110] outline-none border-none bg-transparent"
+                style={{ 
+                  touchAction: "manipulation",
+                  WebkitTapHighlightColor: "transparent",
+                  pointerEvents: "auto"
+                }}
+                aria-label="Toggle menu"
+              >
+                {menuOpen ? <X size={32} strokeWidth={2.5} /> : <Menu size={32} strokeWidth={2.5} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
