@@ -8,8 +8,9 @@ import SmoothScrollLink from "@/app/_components/shared/SmoothScrollLink";
 const NAV_LINKS = [
   { id: "beranda", label: "Beranda" },
   { id: "tentang", label: "Tentang" },
-  { id: "seni", label: "Seni" },
+  { id: "seni", label: "Seni & Budaya" },
   { id: "olahraga", label: "Olahraga" },
+  { id: "daftar", label: "Kontak" },
 ] as const;
 
 export default function Navbar() {
@@ -28,7 +29,7 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         scrolled
           ? "bg-white/95 backdrop-blur-xl py-3 shadow-[0_1px_20px_rgba(16,185,129,0.06)]"
           : "bg-white/60 backdrop-blur-sm py-5"
@@ -38,9 +39,9 @@ export default function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between h-full">
+          {/* Left: Logo */}
+          <div className="flex-1 flex justify-start items-center gap-3">
             <div>
               <OSBLogo />
             </div>
@@ -54,38 +55,45 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Center: Desktop Navigation Links */}
+          <div className="hidden md:flex flex-1 justify-center items-center gap-1 lg:gap-2">
             {NAV_LINKS.map((link) => (
               <SmoothScrollLink
                 key={link.id}
                 targetId={link.id}
-                className="relative px-4 py-2 text-sm font-bold text-gray-600 hover:text-ipnu-600 transition-colors group"
+                className="relative px-3 py-2 text-sm font-bold text-gray-500 hover:text-ipnu-600 transition-colors group whitespace-nowrap"
               >
                 {link.label}
-                <div className="absolute bottom-1 left-4 right-4 h-0.5 bg-ipnu-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                <div className="absolute bottom-1 left-3 right-3 h-0.5 bg-ipnu-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
               </SmoothScrollLink>
             ))}
+          </div>
 
-            <div className="ml-4">
+          {/* Right: Button & Mobile Toggle */}
+          <div className="flex-1 flex justify-end items-center gap-4">
+            <div className="hidden md:block">
               <SmoothScrollLink
                 targetId="daftar"
-                className="btn-primary py-2.5 px-6 text-sm font-bold shadow-lg shadow-ipnu-500/20"
+                className="btn-primary py-2.5 px-6 text-sm font-bold shadow-lg shadow-ipnu-500/20 whitespace-nowrap"
               >
                 <span>Daftar Sekarang</span>
               </SmoothScrollLink>
             </div>
-          </div>
 
-          {/* Mobile Toggle */}
-          <button
-            id="nav-menu-toggle"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 text-ipnu-700 hover:bg-ipnu-50 rounded-lg transition-colors"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            {/* Mobile Toggle */}
+            <button
+              id="nav-menu-toggle"
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 text-ipnu-700 hover:bg-ipnu-50 rounded-lg transition-colors cursor-pointer relative z-[101]"
+              style={{ 
+                touchAction: "manipulation",
+                WebkitTapHighlightColor: "transparent" 
+              }}
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
       </div>
 
