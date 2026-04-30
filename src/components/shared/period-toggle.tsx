@@ -4,35 +4,30 @@ import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { togglePeriodeStatus } from "@/app/actions/periode-actions";
-import { Periode } from "@prisma/client";
+import { toggleFormStatus } from "@/app/actions/settings-actions";
 
 interface PeriodToggleProps {
-  activePeriode: Periode | null;
+  initialState: boolean;
 }
 
-export function PeriodToggle({ activePeriode }: PeriodToggleProps) {
-  const [isActive, setIsActive] = useState(!!activePeriode);
+export function PeriodToggle({ initialState }: PeriodToggleProps) {
+  const [isActive, setIsActive] = useState(initialState);
   const [loading, setLoading] = useState(false);
 
   const handleToggle = async () => {
-    if (!activePeriode && !isActive) {
-      toast.error("Tidak ada periode yang bisa diaktifkan. Silakan buat periode baru.");
-      return;
-    }
-
     setLoading(true);
     try {
-      // Jika activePeriode null tapi kita coba toggle ke true, ini butuh ID.
-      // Untuk kesederhanaan, kita asumsikan ID p2025 dari seeder jika null.
-      const id = activePeriode?.id || "p2025"; 
-      await togglePeriodeStatus(id, !isActive);
-      setIsActive(!isActive);
-      toast.success(isActive ? "Pendaftaran Berhasil Ditutup" : "Pendaftaran Berhasil Dibuka", {
-        description: isActive ? "Formulir pendaftaran sekarang tidak dapat diakses." : "Calon peserta sekarang bisa mendaftar.",
-      });
+      const res = await toggleFormStatus(!isActive);
+      if (res.success) {
+        setIsActive(!isActive);
+        toast.success(!isActive ? "Pendaftaran Berhasil Dibuka" : "Pendaftaran Berhasil Ditutup", {
+          description: !isActive ? "Calon peserta sekarang bisa mendaftar." : "Formulir pendaftaran sekarang tidak dapat diakses.",
+        });
+      } else {
+        toast.error("Gagal mengubah status pendaftaran");
+      }
     } catch (error) {
-      toast.error("Gagal mengubah status pendaftaran");
+      toast.error("Terjadi kesalahan sistem");
     } finally {
       setLoading(false);
     }

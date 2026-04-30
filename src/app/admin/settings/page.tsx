@@ -9,10 +9,15 @@ import {
 import { PeriodToggle } from "@/components/shared/period-toggle";
 import { SettingsIcon, ShieldCheckIcon } from "lucide-react";
 
+import { getFormStatus } from "@/app/actions/settings-actions";
+
 export default async function SettingsPage() {
-  const activePeriode = await prisma.periode.findFirst({
-    where: { isActive: true },
-  });
+  const [activePeriode, formSetting] = await Promise.all([
+    prisma.periode.findFirst({ where: { isActive: true } }),
+    getFormStatus()
+  ]);
+
+  const isFormActive = formSetting.isFormActive;
 
   return (
     <div className="flex flex-1 flex-col gap-8">
@@ -41,13 +46,13 @@ export default async function SettingsPage() {
                 <div className="flex flex-col gap-1.5">
                   <span className="font-bold text-base sm:text-lg">Status Formulir</span>
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-[280px]">
-                    {activePeriode
-                      ? `Terbuka untuk periode ${activePeriode.nama}. Calon peserta dapat mendaftar.`
+                    {isFormActive
+                      ? `Terbuka. Calon peserta dapat mendaftar untuk periode ${activePeriode?.nama || "Aktif"}.`
                       : "Ditutup. Calon peserta tidak dapat mengakses formulir."}
                   </p>
                 </div>
                 <div className="w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-dashed border-muted flex justify-start sm:justify-end">
-                  <PeriodToggle activePeriode={activePeriode} />
+                  <PeriodToggle initialState={isFormActive} />
                 </div>
               </div>
             </div>

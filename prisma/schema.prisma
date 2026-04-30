@@ -38,6 +38,14 @@ model Pendaftar {
   @@map("pendaftar")
 }
 
+model SystemSetting {
+  id           String   @id @default("main")
+  isFormActive Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+
+  @@map("system_settings")
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?

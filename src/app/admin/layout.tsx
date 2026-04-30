@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { prisma } from "@/lib/prisma";
 import { Badge } from "@/components/ui/badge";
+import { RealtimeDashboard } from "@/components/features/dashboard/realtime-dashboard";
 
 export default async function AdminLayout({
   children,
@@ -19,9 +20,10 @@ export default async function AdminLayout({
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
+      <RealtimeDashboard />
       <SidebarProvider>
         <AppSidebar />
-        <SidebarInset className="bg-transparent">
+        <SidebarInset className="bg-transparent min-w-0">
           <header className="flex h-16 shrink-0 items-center justify-between border-b bg-white/80 backdrop-blur-md sticky top-0 z-10 px-8">
             <div className="flex items-center gap-4">
               <SidebarTrigger className="-ml-1" />
@@ -53,7 +55,7 @@ export default async function AdminLayout({
             </div>
           </header>
 
-          <main className="flex-1 p-6 md:p-8">
+          <main className="flex-1 p-6 md:p-8 overflow-x-hidden">
             <div className="mx-auto w-full animate-in fade-in duration-700">
               {children}
             </div>

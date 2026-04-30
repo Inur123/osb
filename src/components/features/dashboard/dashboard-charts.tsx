@@ -125,27 +125,38 @@ export function DashboardCharts({ weeklyData, genderData }: DashboardChartsProps
                 <p className="text-sm text-center">Data organisasi<br/>belum tersedia.</p>
               </div>
             ) : (
-              <ChartContainer config={pieChartConfig} className="h-[300px] w-full">
-                <PieChart>
-                  <Pie
-                    data={genderData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={65}
-                    outerRadius={85}
-                    paddingAngle={5}
-                    cornerRadius={4}
-                  >
-                    {genderData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                  </Pie>
-                  <ChartTooltip content={<ChartTooltipContent className="rounded-xl border-none shadow-2xl" />} />
-                  <ChartLegend content={<ChartLegendContent className="pt-4 font-bold text-xs" />} />
-                </PieChart>
-              </ChartContainer>
+              <>
+                <ChartContainer config={pieChartConfig} className="h-[250px] w-full">
+                  <PieChart>
+                    <Pie
+                      data={genderData}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={65}
+                      outerRadius={85}
+                      paddingAngle={5}
+                      cornerRadius={4}
+                    >
+                      {genderData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip content={<ChartTooltipContent className="rounded-xl border-none shadow-2xl" />} />
+                  </PieChart>
+                </ChartContainer>
+                <div className="flex items-center justify-center gap-6 pt-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-sm bg-[#2563eb]" />
+                    <span className="text-xs font-bold text-muted-foreground">IPNU</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-sm bg-[#db2777]" />
+                    <span className="text-xs font-bold text-muted-foreground">IPPNU</span>
+                  </div>
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
