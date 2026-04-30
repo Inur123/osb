@@ -1,5 +1,4 @@
-"use client";
-
+import Link from "next/link";
 import { Rocket, ClipboardEdit } from "lucide-react";
 
 export default function CTASection() {
@@ -30,14 +29,13 @@ export default function CTASection() {
             </div>
 
             <div className="flex flex-col items-center md:items-end gap-3 min-w-[240px]">
-              <a 
-                href="#"
+              <Link 
+                href="/pendaftaran"
                 className="group relative inline-flex items-center gap-3 bg-white text-ipnu-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-amber-50 transition-all duration-300 shadow-xl"
               >
                 <ClipboardEdit size={22} />
                 <span>Isi Form Pendaftaran</span>
-              </a>
-              <p className="text-[10px] text-ipnu-200">* Form pendaftaran segera dibuka.</p>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Rocket, ArrowRight, Palette, Trophy } from "lucide-react";
 import SmoothScrollLink from "@/app/_components/shared/SmoothScrollLink";
 
@@ -52,13 +53,13 @@ export default function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <div className="w-full sm:w-auto">
-                <SmoothScrollLink
-                  targetId="daftar"
+                <Link
+                  href="/pendaftaran"
                   className="btn-primary text-base w-full sm:w-auto justify-center"
                 >
                   <Rocket size={18} />
                   <span>Daftar Minat Bakat</span>
-                </SmoothScrollLink>
+                </Link>
               </div>
               <div className="w-full sm:w-auto">
                 <SmoothScrollLink
