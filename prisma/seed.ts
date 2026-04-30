@@ -36,12 +36,24 @@ async function main() {
     update: {},
     create: {
       id: "p2025",
-      nama: "Periode 2025",
+      nama: "2025 - 2027",
       isActive: true,
     },
   });
 
   console.log("✅ Default active period created:", periode.nama);
+
+  // Pastikan SystemSetting juga terbuat dan aktif
+  const setting = await prisma.systemSetting.upsert({
+    where: { id: "main" },
+    update: {},
+    create: {
+      id: "main",
+      isFormActive: true,
+    },
+  });
+
+  console.log("✅ Global form status initialized as ACTIVE");
 }
 
 main()

@@ -45,9 +45,9 @@ export default async function PendaftaranPage() {
             </div>
             <Link 
               href="/" 
-              className="inline-flex items-center justify-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-gray-800 transition-all w-full"
+              className="inline-flex items-center justify-center bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-gray-800 transition-all w-full"
             >
-              <ArrowLeft size={18} /> Kembali ke Beranda
+              Kembali ke Beranda
             </Link>
           </div>
         </main>

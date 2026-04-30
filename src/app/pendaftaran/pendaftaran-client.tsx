@@ -9,7 +9,8 @@ import {
   Send,
   ArrowLeft,
   Check,
-  Loader2
+  Loader2,
+  Plus
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -175,7 +176,16 @@ export default function PendaftaranClient() {
 
       if (res.success) {
         toast.success("Pendaftaran Berhasil!");
-        router.push("/success");
+        
+        // Buat query params dari data
+        const params = new URLSearchParams();
+        params.set("nama", finalData.nama);
+        params.set("organisasi", finalData.organisasi);
+        params.set("alamat", finalData.alamat);
+        params.set("asal_pac", finalData.asal_pac);
+        params.set("pilihan", finalData.pilihan.join(","));
+        
+        router.push(`/success?${params.toString()}`);
       } else {
         toast.error(res.error || "Gagal melakukan pendaftaran.");
       }
@@ -384,29 +394,36 @@ export default function PendaftaranClient() {
               </div>
 
               {/* DLL / Custom */}
-              <div className="space-y-4 pt-4 border-t border-gray-100">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest">
-                  Lainnya (Jika tidak ada di list)
-                </p>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    placeholder="Tulis minat bakat lainnya..."
-                    value={customInput}
-                    onChange={(e) => setCustomInput(e.target.value)}
-                    onKeyDown={(e) =>
-                      e.key === "Enter" && (e.preventDefault(), addCustom())
-                    }
-                    className="flex-1 px-4 py-3 rounded-xl border-2 border-dashed border-gray-200 focus:border-ipnu-500 outline-none text-sm transition-all bg-white"
-                  />
-                  <button
-                    type="button"
-                    onClick={addCustom}
-                    className="bg-gray-900 text-white px-4 rounded-xl font-bold text-sm hover:bg-ipnu-600 transition-colors"
-                  >
-                    Tambah
-                  </button>
-                </div>
+                <div className="space-y-3 pt-4 border-t border-gray-100">
+                  <div className="flex flex-col gap-1">
+                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest">
+                      Lainnya (Jika tidak ada di list)
+                    </p>
+                    <p className="text-[10px] text-gray-400 font-medium italic">
+                      *Ketik bakatmu di kolom bawah lalu klik tombol "Tambah"
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="text"
+                      placeholder="Contoh: Seni Musik, Menulis, dll..."
+                      value={customInput}
+                      onChange={(e) => setCustomInput(e.target.value)}
+                      onKeyDown={(e) =>
+                        e.key === "Enter" && (e.preventDefault(), addCustom())
+                      }
+                      className="flex-1 px-4 py-3.5 rounded-xl border-2 border-dashed border-gray-200 focus:border-ipnu-500 outline-none text-sm transition-all bg-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={addCustom}
+                      className="bg-gray-900 text-white px-6 py-3.5 sm:py-0 rounded-xl font-bold text-sm transition-colors whitespace-nowrap flex items-center justify-center gap-2"
+                    >
+                      <Plus size={16} strokeWidth={3} />
+                      Tambah
+                    </button>
+                  </div>
 
                 {/* List pilihan yang sudah dipilih */}
                 {formData.pilihan.length > 0 && (
