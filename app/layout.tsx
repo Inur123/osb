@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import { SITE } from "@/app/lib/constants";
 
 const outfit = Outfit({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
 });
+
+// ===== LOCK 1: Browser Lock =====
+export const viewport: Viewport = {
+  colorScheme: "only light",  // Browser tidak boleh menawarkan dark mode
+  themeColor: "#ffffff",       // Status bar HP dipaksa putih
+};
 
 export const metadata: Metadata = {
   title: "OSB - Olahraga, Seni & Budaya | PC IPNU IPPNU Magetan",
@@ -25,29 +32,24 @@ export const metadata: Metadata = {
   },
 };
 
-// ====== LOCK 1: Browser Lock — beritahu browser sejak awal ======
-export const viewport: Viewport = {
-  colorScheme: "only light",  // Browser TIDAK menawarkan dark mode
-  themeColor: "#ffffff",      // Bar browser di HP dipaksa putih
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="id"
-      className={`${outfit.variable} light h-full antialiased`}
+      className={`${outfit.variable} h-full antialiased light`}
       data-theme="light"
-      data-darkreader-mode="disabled"      // Matikan paksa ekstensi Dark Reader
+      data-darkreader-mode="disabled"
       style={{
-        colorScheme: "only light",          // Standar browser
-        forcedColorAdjust: "none" as never, // Cegah HP (Oppo/Xiaomi) merubah warna
+        colorScheme: "only light",
+        // @ts-ignore — forcedColorAdjust mencegah OPPO/Xiaomi ubah warna otomatis
+        forcedColorAdjust: "none",
       }}
     >
       <body
-        className="min-h-full flex flex-col bg-white"
-        style={{ backgroundColor: "#ffffff", color: "#1a2e24" }}
+        className="min-h-full flex flex-col bg-white text-ipnu-950"
+        style={{ backgroundColor: "#ffffff" }}
       >
         {children}
       </body>

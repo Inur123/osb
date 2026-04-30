@@ -28,63 +28,57 @@
   --color-gold-500: #f59e0b;
 }
 
-/* ===== LOCK 2: OS Lock - Paksa light mode di root ===== */
+/* ===== LOCK 2: OS Lock - Paksa Light Mode di semua elemen ===== */
+:root, * {
+  color-scheme: only light !important;
+}
+
 :root,
 html,
 html[class] {
-  color-scheme: only light !important;
   --background: #ffffff;
   --foreground: #1a2e24;
   scroll-behavior: smooth;
 }
 
-/* ===== LOCK 2b: Override paksa saat device pakai dark mode (Android OPPO/Xiaomi) ===== */
-@media (prefers-color-scheme: dark) {
-  :root, html, body {
-    color-scheme: only light !important;
-    background-color: #ffffff !important;
-    color: #1a2e24 !important;
-  }
-  /* Cegah browser menginvert warna gambar */
-  img, video, svg {
-    filter: none !important;
-  }
-}
-
-/* ===== Netralkan class .dark jika ada library yang menyuntiknya ===== */
+/* Pengaman terakhir: Netralkan class .dark jika ada library yang menyuntiknya */
 @layer base {
   html, body {
     background-color: #ffffff !important;
+    color: #1a2e24 !important;
   }
   .dark, [data-theme="dark"] {
     background-color: #ffffff !important;
+    color: #1a2e24 !important;
   }
 }
 
 /* ========== Base ========== */
 * { box-sizing: border-box; }
 
+/* Diletakkan di @layer base agar diproses SETELAH Tailwind preflight reset */
+@layer base {
+  button,
+  a,
+  [role="button"],
+  [role="link"],
+  label[for],
+  select,
+  summary,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+}
+
 body {
   background: #ffffff !important;
   color: #1a2e24;
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
-}
-
-/* ===== FORCE LIGHT MODE: Override Android dark mode (OPPO, Samsung, etc) ===== */
-@media (prefers-color-scheme: dark) {
-  html, body {
-    background-color: #ffffff !important;
-    color: #1a2e24 !important;
-    color-scheme: light !important;
-  }
-  /* Paksa semua elemen kembali ke warna terang */
-  * {
-    border-color: inherit;
-  }
-  img, video {
-    filter: none !important;
-  }
 }
 
 /* ========== Scrollbar ========== */
