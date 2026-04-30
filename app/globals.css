@@ -28,7 +28,7 @@
   --color-gold-500: #f59e0b;
 }
 
-/* ===== LOCK 2: OS Lock - Hanya kunci di root, TIDAK ke semua elemen ===== */
+/* ===== LOCK 2: OS Lock - Paksa light mode di root ===== */
 :root,
 html,
 html[class] {
@@ -38,8 +38,20 @@ html[class] {
   scroll-behavior: smooth;
 }
 
-/* Pengaman terakhir: Netralkan class .dark jika ada library yang menyuntiknya */
-/* TIDAK pakai !important pada color agar warna desain tidak terganggu */
+/* ===== LOCK 2b: Override paksa saat device pakai dark mode (Android OPPO/Xiaomi) ===== */
+@media (prefers-color-scheme: dark) {
+  :root, html, body {
+    color-scheme: only light !important;
+    background-color: #ffffff !important;
+    color: #1a2e24 !important;
+  }
+  /* Cegah browser menginvert warna gambar */
+  img, video, svg {
+    filter: none !important;
+  }
+}
+
+/* ===== Netralkan class .dark jika ada library yang menyuntiknya ===== */
 @layer base {
   html, body {
     background-color: #ffffff !important;

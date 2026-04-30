@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import { SITE } from "@/app/lib/constants";
 
 const outfit = Outfit({
   variable: "--font-geist-sans",
@@ -9,26 +8,13 @@ const outfit = Outfit({
   display: "swap",
 });
 
-// ===== LOCK 1: Browser Lock =====
-export const viewport: Viewport = {
-  colorScheme: "only light",  // Browser tidak boleh menawarkan dark mode
-  themeColor: "#ffffff",       // Status bar HP dipaksa putih
-};
-
 export const metadata: Metadata = {
   title: "OSB - Olahraga, Seni & Budaya | PC IPNU IPPNU Magetan",
   description:
     "Pendataan Minat dan Bakat bidang Olahraga, Seni & Budaya PC IPNU IPPNU Kabupaten Magetan. Bergabunglah dan kembangkan potensimu bersama kami!",
   keywords: [
-    "IPNU",
-    "IPPNU",
-    "Magetan",
-    "Olahraga",
-    "Seni",
-    "Budaya",
-    "Minat Bakat",
-    "Pemuda",
-    "Nahdlatul Ulama",
+    "IPNU", "IPPNU", "Magetan", "Olahraga",
+    "Seni", "Budaya", "Minat Bakat", "Pemuda", "Nahdlatul Ulama",
   ],
   authors: [{ name: "PC IPNU IPPNU Magetan" }],
   openGraph: {
@@ -39,26 +25,29 @@ export const metadata: Metadata = {
   },
 };
 
+// ====== LOCK 1: Browser Lock — beritahu browser sejak awal ======
+export const viewport: Viewport = {
+  colorScheme: "only light",  // Browser TIDAK menawarkan dark mode
+  themeColor: "#ffffff",      // Bar browser di HP dipaksa putih
+};
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="id"
-      className={`${outfit.variable} h-full antialiased light`}
+      className={`${outfit.variable} light h-full antialiased`}
       data-theme="light"
-      data-darkreader-mode="disabled"
+      data-darkreader-mode="disabled"      // Matikan paksa ekstensi Dark Reader
       style={{
-        colorScheme: "only light",     // Standar CSS modern
-        // @ts-ignore — forcedColorAdjust mencegah OPPO/Xiaomi ubah warna otomatis
-        forcedColorAdjust: "none",
+        colorScheme: "only light",          // Standar browser
+        forcedColorAdjust: "none" as never, // Cegah HP (Oppo/Xiaomi) merubah warna
       }}
     >
       <body
-        className="min-h-full flex flex-col bg-white text-ipnu-950"
-        style={{ backgroundColor: "#ffffff" }}
+        className="min-h-full flex flex-col bg-white"
+        style={{ backgroundColor: "#ffffff", color: "#1a2e24" }}
       >
         {children}
       </body>
