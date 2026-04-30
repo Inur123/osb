@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 interface SmoothScrollLinkProps {
   targetId: string;
@@ -10,8 +10,8 @@ interface SmoothScrollLinkProps {
 }
 
 /**
- * A link component that smoothly scrolls to a target element
- * WITHOUT adding # to the URL — keeps the URL clean.
+ * Scroll ke section tanpa menambahkan # ke URL.
+ * Menggunakan <button> agar URL tidak pernah berubah di iOS.
  */
 export default function SmoothScrollLink({
   targetId,
@@ -19,41 +19,37 @@ export default function SmoothScrollLink({
   className = "",
   onClick,
 }: SmoothScrollLinkProps) {
-  const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault();
-      
-      // Execute onClick (e.g., closing the menu)
-      onClick?.();
+  const isScrolling = useRef(false);
 
-      // Small delay to ensure menu close animation doesn't interrupt scroll
-      setTimeout(() => {
-        const target = document.getElementById(targetId);
-        if (target) {
-          try {
-            const navHeight = 80;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            
-            window.scrollTo({
-              top: targetPosition,
-              behavior: "smooth"
-            });
-          } catch (err) {
-            // Fallback to simple scroll if calculation fails
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+  const handleClick = useCallback(() => {
+    if (isScrolling.current) return;
+    isScrolling.current = true;
 
-          // Keep URL clean — no hash
-          window.history.replaceState(null, "", window.location.pathname);
-        }
-      }, 50);
-    },
-    [targetId, onClick]
-  );
+    onClick?.();
+
+    setTimeout(() => {
+      const target = document.getElementById(targetId);
+      if (target) {
+        const navHeight = 70;
+        const top =
+          target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        window.scrollTo({ top, behavior: "smooth" });
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+      isScrolling.current = false;
+    }, 50);
+  }, [targetId, onClick]);
 
   return (
-    <a href={`#${targetId}`} onClick={handleClick} className={className}>
+    <button
+      type="button"
+      onClick={handleClick}
+      className={className}
+      // JANGAN tambahkan inline style apapun di sini
+      // agar class seperti btn-primary tidak tertimpa
+      data-smooth-scroll={targetId}
+    >
       {children}
-    </a>
+    </button>
   );
 }

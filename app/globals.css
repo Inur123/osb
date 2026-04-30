@@ -45,6 +45,22 @@ body {
   overflow-x: hidden;
 }
 
+/* ===== FORCE LIGHT MODE: Override Android dark mode (OPPO, Samsung, etc) ===== */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #ffffff !important;
+    color: #1a2e24 !important;
+    color-scheme: light !important;
+  }
+  /* Paksa semua elemen kembali ke warna terang */
+  * {
+    border-color: inherit;
+  }
+  img, video {
+    filter: none !important;
+  }
+}
+
 /* ========== Scrollbar ========== */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f1f5f3; }

@@ -31,6 +31,8 @@ export const metadata: Metadata = {
       "Pendataan Minat dan Bakat bidang Olahraga, Seni & Budaya PC IPNU IPPNU Kabupaten Magetan.",
     type: "website",
   },
+  // Force light color scheme via metadata (paling aman di Next.js)
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -45,7 +47,10 @@ export default function RootLayout({
       data-theme="light"
       style={{ colorScheme: "light" }}
     >
-      <body className="min-h-full flex flex-col bg-white text-ipnu-950">
+      <body
+        className="min-h-full flex flex-col bg-white text-ipnu-950"
+        style={{ backgroundColor: "#ffffff" }}
+      >
         {children}
       </body>
     </html>
