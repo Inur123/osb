@@ -47,7 +47,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-gray-800 mb-4">Menu</h4>
+            <h4 className="font-bold mb-4" style={{ color: "#1f2937" }}>Menu</h4>
             <ul className="space-y-2">
               {NAV_LINKS.slice(0, 4).map((link) => (
                 <li key={link.id}>
@@ -64,8 +64,8 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-gray-800 mb-4">Kontak</h4>
-            <ul className="space-y-3 text-sm text-gray-400">
+            <h4 className="font-bold mb-4" style={{ color: "#1f2937" }}>Kontak</h4>
+            <ul className="space-y-3 text-sm" style={{ color: "#9ca3af" }}>
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="text-ipnu-500 mt-0.5 shrink-0" />
                 <span>{SITE.location}</span>
@@ -82,7 +82,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div
+          className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{ borderTop: "1px solid #e5e7eb" }}
+        >
           <p className="text-xs text-gray-400">
             © {currentYear} {SITE.org}. All rights reserved.
           </p>

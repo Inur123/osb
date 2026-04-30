@@ -40,7 +40,11 @@ const SPORTS = [
 
 export default function OlahragaSection() {
   return (
-    <section id="olahraga" className="relative py-10 sm:py-14 bg-gray-50/50 overflow-hidden">
+    <section
+      id="olahraga"
+      className="relative py-10 sm:py-14 overflow-hidden"
+      style={{ backgroundColor: "#f9fdfb" }}
+    >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
@@ -57,16 +61,20 @@ export default function OlahragaSection() {
                 return (
                   <div
                     key={sport.name}
-                    className={`glass-card rounded-xl p-5 group cursor-pointer bg-white ${sport.border} flex flex-col items-center text-center sm:items-start sm:text-left transition-all duration-300 hover:scale-[1.02]`}
+                    className={`glass-card rounded-xl p-5 group cursor-pointer flex flex-col items-center text-center sm:items-start sm:text-left transition-all duration-300 hover:scale-[1.02]`}
+                    style={{
+                      backgroundColor: "#ffffff",
+                      borderColor: "#d1fae5",
+                    }}
                   >
-                    <div 
-                      className={`icon-box bg-gradient-to-br ${sport.gradient} mb-3 group-hover:rotate-6 transition-transform`}
+                    <div
+                      className={`icon-box mb-3 group-hover:rotate-6 transition-transform`}
                       style={{ backgroundColor: sport.iconColor.includes("emerald") ? "#ecfdf5" : sport.iconColor.includes("sky") ? "#f0f9ff" : sport.iconColor.includes("violet") ? "#f5f3ff" : "#fff7ed" }}
                     >
                       <Icon size={20} className={sport.iconColor} />
                     </div>
-                    <h4 className="font-bold text-gray-800 mb-1">{sport.name}</h4>
-                    <p className="text-xs text-gray-400 leading-relaxed">{sport.desc}</p>
+                    <h4 className="font-bold mb-1" style={{ color: "#1f2937" }}>{sport.name}</h4>
+                    <p className="text-xs leading-relaxed" style={{ color: "#9ca3af" }}>{sport.desc}</p>
                   </div>
                 );
               })}
