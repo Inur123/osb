@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Periode {
+  id          String      @id @default(cuid())
+  nama        String      // Contoh: "Tahun 2025", "Gelombang 1"
+  isActive    Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  pendaftar   Pendaftar[]
+
+  @@map("periode")
+}
+
+model Pendaftar {
+  id          String   @id @default(cuid())
+  nama        String
+  organisasi  String   // IPNU / IPPNU
+  alamat      String
+  asal_pac    String
+  minat_bakat String[] 
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relasi ke Periode
+  periodeId   String
+  periode     Periode  @relation(fields: [periodeId], references: [id])
+
+  @@map("pendaftar")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String
+  role          String    @default("admin")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("users")
+}
