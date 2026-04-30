@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import OSBLogo from "@/app/_components/shared/OSBLogo";
 import SmoothScrollLink from "@/app/_components/shared/SmoothScrollLink";
@@ -14,49 +14,60 @@ const NAV_LINKS = [
 ] as const;
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Gunakan useCallback agar referensi fungsi stabil
+  const toggleMenu = useCallback(() => {
+    setMenuOpen((prev) => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
   }, []);
 
   return (
     <nav
       id="navbar"
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 py-3 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-[0_1px_20px_rgba(16,185,129,0.06)]"
-          : "bg-white/60 backdrop-blur-sm"
-      }`}
       style={{
-        WebkitBackdropFilter: scrolled ? "blur(24px)" : "blur(8px)",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        // Gunakan backgroundColor solid + opacity — BUKAN backdrop-filter
+        // agar tidak membuat stacking context yang memblokir klik di iOS
+        backgroundColor: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.85)",
+        borderBottom: scrolled ? "1px solid rgba(16,185,129,0.08)" : "none",
+        boxShadow: scrolled ? "0 2px 20px rgba(16,185,129,0.07)" : "none",
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+        WebkitTransform: "translateZ(0)", // Paksa GPU layer di iOS
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Left: Logo & Title - Ultra Slim & Neat */}
-          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-            <div className="flex-shrink-0 scale-90 sm:scale-100 origin-left">
-              <OSBLogo />
-            </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-lg sm:text-xl font-black tracking-tighter text-gray-900 leading-none mb-0.5 whitespace-nowrap">
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 16px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px" }}>
+
+          {/* ===== Left: Logo ===== */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
+            <OSBLogo />
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <span style={{ fontSize: "18px", fontWeight: 900, color: "#111827", lineHeight: 1, letterSpacing: "-0.5px", whiteSpace: "nowrap" }}>
                 OSB
               </span>
-              <span className="text-[8px] sm:text-[10px] font-extrabold text-ipnu-600 tracking-wider uppercase leading-none whitespace-nowrap">
+              <span style={{ fontSize: "9px", fontWeight: 700, color: "#059669", letterSpacing: "0.12em", textTransform: "uppercase", lineHeight: 1, marginTop: "3px", whiteSpace: "nowrap" }}>
                 IPNU IPPNU Magetan
               </span>
             </div>
           </div>
 
-          {/* Center: Desktop Navigation Links */}
-          <div className="hidden lg:flex flex-1 justify-center items-center gap-1 xl:gap-2 px-4">
+          {/* ===== Center: Desktop Nav ===== */}
+          <div className="hidden lg:flex" style={{ flex: 1, justifyContent: "center", alignItems: "center", gap: "4px" }}>
             {NAV_LINKS.map((link) => (
               <SmoothScrollLink
                 key={link.id}
@@ -69,70 +80,80 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right: Button & Mobile Toggle */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          {/* ===== Right: CTA + Hamburger ===== */}
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexShrink: 0 }}>
+            {/* Tombol Desktop */}
             <div className="hidden md:block">
               <SmoothScrollLink
                 targetId="daftar"
-                className="btn-primary py-2.5 px-6 text-sm font-bold shadow-lg shadow-ipnu-500/20 whitespace-nowrap"
+                className="btn-primary py-2.5 px-6 text-sm font-bold whitespace-nowrap"
               >
-                <span>Daftar Sekarang</span>
+                Daftar Sekarang
               </SmoothScrollLink>
             </div>
 
-            {/* Mobile Toggle - FORCE HIT AREA */}
-            <div className="md:hidden flex items-center justify-center">
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setMenuOpen(!menuOpen);
-                }}
-                className="p-3 -mr-2 text-ipnu-700 active:bg-ipnu-50 rounded-full transition-colors cursor-pointer relative z-[150] outline-none border-none bg-transparent"
-                style={{ 
-                  touchAction: "manipulation",
-                  WebkitTapHighlightColor: "transparent"
-                }}
-                aria-label="Toggle menu"
-              >
-                {menuOpen ? <X size={28} strokeWidth={2.5} /> : <Menu size={28} strokeWidth={2.5} />}
-              </button>
-            </div>
+            {/* ===== Hamburger: iOS-safe Button ===== */}
+            <button
+              type="button"
+              aria-label="Toggle menu"
+              className="lg:hidden"
+              onClick={toggleMenu}
+              style={{
+                // JANGAN tambahkan display di sini — biarkan Tailwind lg:hidden yang mengontrol
+                alignItems: "center",
+                justifyContent: "center",
+                width: "44px",           // minimum Apple tap target
+                height: "44px",          // minimum Apple tap target
+                padding: "8px",
+                border: "none",
+                borderRadius: "10px",
+                background: "transparent",
+                color: "#047857",
+                cursor: "pointer",
+                position: "relative",
+                zIndex: 200,             // di atas segalanya
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "manipulation",
+                pointerEvents: "auto",
+                userSelect: "none",
+              }}
+            >
+              {menuOpen
+                ? <X size={26} strokeWidth={2.5} />
+                : <Menu size={26} strokeWidth={2.5} />
+              }
+            </button>
           </div>
+
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown (Gaya 'Nyatu') - Tanpa Motion agar stabil di iOS */}
+      {/* ===== Mobile Menu Dropdown ===== */}
       {menuOpen && (
         <div
-          className={`md:hidden overflow-hidden ${
-            scrolled ? "bg-white/95 backdrop-blur-xl" : "bg-white"
-          }`}
           style={{
-            backgroundColor: scrolled ? "rgba(255, 255, 255, 0.95)" : "#ffffff",
-            WebkitBackdropFilter: scrolled ? "blur(24px)" : "blur(16px)",
-            WebkitTapHighlightColor: "transparent",
+            backgroundColor: "#ffffff",
+            borderTop: "1px solid #ecfdf5",
           }}
         >
-          <div className="px-6 py-8 space-y-6 text-center border-t border-gray-50/50">
+          <div style={{ padding: "24px 24px 32px", display: "flex", flexDirection: "column", gap: "8px" }}>
             {NAV_LINKS.map((link) => (
-              <div key={link.id}>
-                <SmoothScrollLink
-                  targetId={link.id}
-                  onClick={() => setMenuOpen(false)}
-                  className="block py-2 text-xl font-bold text-gray-800 hover:text-ipnu-600 transition-colors cursor-pointer"
-                >
-                  {link.label}
-                </SmoothScrollLink>
-              </div>
+              <SmoothScrollLink
+                key={link.id}
+                targetId={link.id}
+                onClick={closeMenu}
+                className="block py-3 text-center text-lg font-bold text-gray-800 hover:text-ipnu-600 transition-colors rounded-xl hover:bg-ipnu-50"
+              >
+                {link.label}
+              </SmoothScrollLink>
             ))}
-            <div className="pt-4">
+            <div style={{ marginTop: "8px" }}>
               <SmoothScrollLink
                 targetId="daftar"
-                onClick={() => setMenuOpen(false)}
-                className="btn-primary w-full justify-center py-4 text-lg font-bold shadow-xl shadow-ipnu-500/15 cursor-pointer"
+                onClick={closeMenu}
+                className="btn-primary w-full justify-center py-4 text-base font-bold"
               >
-                <span>Daftar Sekarang</span>
+                Daftar Sekarang
               </SmoothScrollLink>
             </div>
           </div>
