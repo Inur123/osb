@@ -6,6 +6,9 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  /* ===== LOCK 3: Tailwind Lock - Nonaktifkan semua class dark: ===== */
+  --variant-dark: none;
+
   /* IPNU Green Palette */
   --color-ipnu-50: #ecfdf5;
   --color-ipnu-100: #d1fae5;
@@ -25,14 +28,29 @@
   --color-gold-500: #f59e0b;
 }
 
-/* FORCE LIGHT - override system dark mode */
+/* ===== LOCK 2: OS Lock - Paksa Light Mode di semua elemen ===== */
+:root, * {
+  color-scheme: only light !important;
+}
+
 :root,
 html,
 html[class] {
-  color-scheme: light !important;
   --background: #ffffff;
   --foreground: #1a2e24;
   scroll-behavior: smooth;
+}
+
+/* Pengaman terakhir: Netralkan class .dark jika ada library yang menyuntiknya */
+@layer base {
+  html, body {
+    background-color: #ffffff !important;
+    color: #1a2e24 !important;
+  }
+  .dark, [data-theme="dark"] {
+    background-color: #ffffff !important;
+    color: #1a2e24 !important;
+  }
 }
 
 /* ========== Base ========== */

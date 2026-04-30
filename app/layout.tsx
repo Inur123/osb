@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/app/lib/constants";
@@ -8,6 +8,12 @@ const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
 });
+
+// ===== LOCK 1: Browser Lock =====
+export const viewport: Viewport = {
+  colorScheme: "only light",  // Browser tidak boleh menawarkan dark mode
+  themeColor: "#ffffff",       // Status bar HP dipaksa putih
+};
 
 export const metadata: Metadata = {
   title: "OSB - Olahraga, Seni & Budaya | PC IPNU IPPNU Magetan",
@@ -31,8 +37,6 @@ export const metadata: Metadata = {
       "Pendataan Minat dan Bakat bidang Olahraga, Seni & Budaya PC IPNU IPPNU Kabupaten Magetan.",
     type: "website",
   },
-  // Force light color scheme via metadata (paling aman di Next.js)
-  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -43,9 +47,14 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${outfit.variable} h-full antialiased`}
+      className={`${outfit.variable} h-full antialiased light`}
       data-theme="light"
-      style={{ colorScheme: "light" }}
+      data-darkreader-mode="disabled"
+      style={{
+        colorScheme: "only light",     // Standar CSS modern
+        // @ts-ignore — forcedColorAdjust mencegah OPPO/Xiaomi ubah warna otomatis
+        forcedColorAdjust: "none",
+      }}
     >
       <body
         className="min-h-full flex flex-col bg-white text-ipnu-950"
