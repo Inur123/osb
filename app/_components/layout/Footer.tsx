@@ -15,7 +15,15 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer id="kontak" className="border-t border-gray-100 bg-gray-50/80">
+    <footer
+      id="kontak"
+      style={{
+        backgroundColor: "#f9fdfb",
+        borderTop: "1px solid #f1f5f3",
+        // @ts-ignore
+        forcedColorAdjust: "none",
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Brand */}

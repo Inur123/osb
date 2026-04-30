@@ -16,9 +16,18 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ipnu-50 border border-ipnu-200 shadow-sm mx-auto lg:mx-0">
-              <div className="w-2 h-2 rounded-full bg-ipnu-500" />
-              <span className="text-sm font-semibold text-ipnu-700">
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ipnu-50 border shadow-sm mx-auto lg:mx-0"
+              style={{
+                backgroundColor: "#ecfdf5",
+                borderColor: "#a7f3d0",
+                borderWidth: "1px",
+                // @ts-ignore
+                forcedColorAdjust: "none",
+              }}
+            >
+              <div className="w-2 h-2 rounded-full bg-ipnu-500" style={{ backgroundColor: "#10b981" }} />
+              <span className="text-sm font-semibold text-ipnu-700" style={{ color: "#047857" }}>
                 Pendaftaran Dibuka
               </span>
             </div>
@@ -100,26 +109,42 @@ export default function HeroSection() {
               </div>
 
               {/* Floating badges */}
-              <div className="absolute -top-3 -right-3 bg-white rounded-2xl px-4 py-3 shadow-lg shadow-ipnu-500/10 border border-ipnu-100 hidden sm:block">
+              <div
+                className="absolute -top-3 -right-3 rounded-2xl px-4 py-3 shadow-lg hidden sm:block"
+                style={{
+                  backgroundColor: "#ffffff",
+                  border: "1px solid #d1fae5",
+                  // @ts-ignore
+                  forcedColorAdjust: "none",
+                }}
+              >
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#fffbeb" }}>
                     <Palette size={18} className="text-amber-500" />
                   </div>
                   <div>
-                    <div className="text-[11px] text-gray-400">Seni Budaya</div>
-                    <div className="text-sm font-bold text-ipnu-700">4 Cabang</div>
+                    <div className="text-[11px]" style={{ color: "#9ca3af" }}>Seni Budaya</div>
+                    <div className="text-sm font-bold" style={{ color: "#047857" }}>4 Cabang</div>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -bottom-3 -left-3 bg-white rounded-2xl px-4 py-3 shadow-lg shadow-ipnu-500/10 border border-ipnu-100 hidden sm:block">
+              <div
+                className="absolute -bottom-3 -left-3 rounded-2xl px-4 py-3 shadow-lg hidden sm:block"
+                style={{
+                  backgroundColor: "#ffffff",
+                  border: "1px solid #d1fae5",
+                  // @ts-ignore
+                  forcedColorAdjust: "none",
+                }}
+              >
                 <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-ipnu-50 to-ipnu-100 flex items-center justify-center">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#ecfdf5" }}>
                     <Trophy size={18} className="text-ipnu-600" />
                   </div>
                   <div>
-                    <div className="text-[11px] text-gray-400">Olahraga</div>
-                    <div className="text-sm font-bold text-ipnu-700">4+ Cabang</div>
+                    <div className="text-[11px]" style={{ color: "#9ca3af" }}>Olahraga</div>
+                    <div className="text-sm font-bold" style={{ color: "#047857" }}>4+ Cabang</div>
                   </div>
                 </div>
               </div>

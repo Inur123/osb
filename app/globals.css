@@ -28,28 +28,24 @@
   --color-gold-500: #f59e0b;
 }
 
-/* ===== LOCK 2: OS Lock - Paksa Light Mode di semua elemen ===== */
-:root, * {
-  color-scheme: only light !important;
-}
-
+/* ===== LOCK 2: OS Lock - Hanya kunci di root, TIDAK ke semua elemen ===== */
 :root,
 html,
 html[class] {
+  color-scheme: only light !important;
   --background: #ffffff;
   --foreground: #1a2e24;
   scroll-behavior: smooth;
 }
 
 /* Pengaman terakhir: Netralkan class .dark jika ada library yang menyuntiknya */
+/* TIDAK pakai !important pada color agar warna desain tidak terganggu */
 @layer base {
   html, body {
     background-color: #ffffff !important;
-    color: #1a2e24 !important;
   }
   .dark, [data-theme="dark"] {
     background-color: #ffffff !important;
-    color: #1a2e24 !important;
   }
 }
 
@@ -90,10 +86,14 @@ body {
 /* ========== Cards & Effects ========== */
 .glass-card {
   background: #ffffff;
+  background-color: #ffffff;         /* Eksplisit untuk Android */
   border: 1px solid #f1f5f3;
+  border-color: #f1f5f3;             /* Eksplisit untuk Android */
   border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(16, 185, 129, 0.03);
   transition: all 0.3s ease;
+  forced-color-adjust: none;         /* Cegah Android Force Dark */
+  -webkit-forced-color-adjust: none;
 }
 
 /* ========== Gradient Text - SAFARI SAFE VERSION ========== */
@@ -137,6 +137,8 @@ body {
   color: #ffffff; font-weight: 600; border-radius: 9999px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+  forced-color-adjust: none;
+  -webkit-forced-color-adjust: none;
 }
 .btn-primary:hover {
   box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
@@ -145,9 +147,12 @@ body {
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.875rem 2rem;
-  background: #ffffff; color: #059669; font-weight: 600;
+  background: #ffffff; background-color: #ffffff;
+  color: #059669; font-weight: 600;
   border-radius: 9999px; border: 1.5px solid #d1fae5;
   transition: all 0.3s ease;
+  forced-color-adjust: none;
+  -webkit-forced-color-adjust: none;
 }
 .btn-secondary:hover {
   background: #f0fdf4; border-color: #10b981;
@@ -171,9 +176,16 @@ body {
 .hero-bg {
   background-color: #ffffff;
   background: radial-gradient(circle at 0% 0%, #f0fdf4 0%, #ffffff 50%, #fffbeb 100%);
+  forced-color-adjust: none;
+  -webkit-forced-color-adjust: none;
 }
 
-.section-soft { background: #f9fdfb; }
+.section-soft {
+  background: #f9fdfb;
+  background-color: #f9fdfb;
+  forced-color-adjust: none;
+  -webkit-forced-color-adjust: none;
+}
 
 /* ========== Icon Box ========== */
 .icon-box {
